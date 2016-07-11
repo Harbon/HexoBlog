@@ -32,3 +32,18 @@ mkfs -t ext4 /dev/sdc1
 ```
 mount -t ext4 /dev/sdc1 /mount_dir
 ```
+运行后你会发现系统会报错，原因是你没把 /mount_dir 以及硬盘信息添加到 /etc/fstab 文件
+运行 vim 命令后你会发现这个文件是这样的
+
+>/etc/fstab: static file system information.
+UUID=5c51f0c7-6ad1-41e5-8026-a75466a07617 /               ext4    errors=remount-ro 0       1
+UUID=553cdacd-cc3d-4409-99e5-4d6ab5db975f /var/lib/docker ext4 defaults 0 2
+LABEL=YUNIFYSWAP none            swap    sw              0       0
+UUID=8ae65141-3051-48a5-826d-1e1ddc3ca70a /home           ext4 defaults 0 2
+
+我们只需要关心前 3 个字段，第一个是UUID是你的硬盘的唯一标识，可通过
+```
+blkid /dev/sdc1
+```
+命令来获取，第二个字段是你要挂载的目录绝对路径，第三个是你分区的格式化格式, 后面 3 参数一般就填 defaults 0 2。
+添加好后再运行之前的挂载命令就可以了。
