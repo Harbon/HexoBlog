@@ -69,5 +69,6 @@ theme: nextTheme
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@git.coding.net:harbon/Blog.git
+  repo: git@github.com:Harbon/harbon.github.io.git
+  #repo: git@git.coding.net:harbon/Blog.git
   branch: master
